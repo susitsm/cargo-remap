@@ -1,0 +1,16 @@
+[package]
+name = "cargo-remap"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Map every git worktree to one fixed path so new worktrees reuse cargo's build cache"
+readme = "README.md"
+repository = "https://github.com/susitsm/cargo-remap"
+license = "MIT"
+keywords = ["cargo", "git-worktree", "build-cache", "namespace"]
+categories = ["development-tools", "development-tools::cargo-plugins"]
+exclude = [".agents/", "AGENTS.md", "docs/demo.gif", "docs/demo/", "tests/"]
+
+[dependencies]
+serde = { version = "1.0.229", features = ["derive"] }
+toml = "1.2.1"

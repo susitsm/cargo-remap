@@ -1,0 +1,8 @@
+# Distro userland for the cargo-remap tests. BASE is the distro image; NO_UTIL_LINUX=1
+# keeps the busybox unshare/setpriv/chroot on Alpine to check the failure mode.
+ARG BASE
+FROM ${BASE}
+ARG NO_UTIL_LINUX=0
+ENV NO_UTIL_LINUX=${NO_UTIL_LINUX}
+COPY install-deps.sh /install-deps.sh
+RUN sh /install-deps.sh

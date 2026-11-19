@@ -1,0 +1,11 @@
+# A plain distro for a first-time user: a `dev` user with sudo, a Rust toolchain, a C
+# linker and curl. Nothing else is added (in particular no git), and util-linux is
+# whatever the distro ships by default.
+ARG BASE
+FROM ${BASE}
+COPY install-env.sh /install-env.sh
+RUN sh /install-env.sh
+USER dev
+ENV HOME=/home/dev RUSTUP_HOME=/home/dev/.rustup CARGO_HOME=/home/dev/.cargo PATH=/home/dev/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+RUN curl -sSf https://sh.rustup.rs | sh -s -- -y -q --profile minimal --no-modify-path >/dev/null 2>&1
+WORKDIR /home/dev
