@@ -23,21 +23,15 @@ def say(s): emit(f"\x1b[2m# {s}\x1b[0m\r\n")
 
 # --- silent reset: warm main worktree
 M = f"{D}/myapp"
-for w in ("plain", "remap"):
+for w in ("remap",):
     subprocess.run(f"git worktree remove --force ../{w}; git branch -qD {w}", shell=True, cwd=M, capture_output=True)
 sh("cargo remap cargo build && cargo remap cargo check", M)
 t0 = time.time()   # the silent reset above is not part of the recording
-VANILLA = {"CARGO_REMAP_ACTIVE": "1"}   # bypass the installed cargo wrapper = plain cargo
 
 say("main worktree: already built")
 prompt("myapp"); typed("cargo build"); run("cargo build", M)
 time.sleep(0.8)
-say("1) new worktree with plain git: cold target/ dir")
-prompt("myapp"); typed("git worktree add ../plain -b plain"); run("git worktree add ../plain -b plain 2>&1", M)
-prompt("myapp"); typed("cd ../plain && cargo build"); run("cargo build", f"{D}/plain", VANILLA)
-prompt("plain"); typed("cargo check"); run("cargo check", f"{D}/plain", VANILLA)
-time.sleep(0.8)
-say("2) new worktree with cargo-remap: same path, copied target/")
+say("new worktree with cargo-remap: same path, copied target/")
 prompt("myapp"); typed("cargo remap worktree add ../remap -b remap"); run("cargo remap worktree add ../remap -b remap 2>&1", M)
 prompt("myapp"); typed("cd ../remap && cargo build"); run("cargo build", f"{D}/remap")
 prompt("remap"); typed("cargo check"); run("cargo check", f"{D}/remap")

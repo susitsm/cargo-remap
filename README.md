@@ -2,7 +2,7 @@
 
 **A new git worktree that builds as fast as the one you copied it from.**
 
-![A new worktree: git worktree add rebuilds everything in 6.8 s, cargo remap worktree add finishes cargo build in 0.05 s](https://raw.githubusercontent.com/susitsm/cargo-remap/main/docs/demo.gif)
+![cargo remap worktree add, then cargo build and cargo check in the new worktree finish at once, with nothing to recompile](https://raw.githubusercontent.com/susitsm/cargo-remap/main/docs/demo.gif)
 
 `cargo-remap` runs cargo (and any other command) with the current git worktree
 bind-mounted at one fixed path, inside a private mount namespace, so every worktree
