@@ -10,7 +10,7 @@ use std::env;
 use std::fs;
 use std::path::{Path, PathBuf};
 
-use crate::util::{die, git};
+use crate::{die, git};
 
 const GUIDE: &str = include_str!("agents-skill.md");
 pub const DEFAULT_PATH: &str = ".agents/skills/cargo-remap/SKILL.md";

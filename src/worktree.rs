@@ -9,8 +9,8 @@ use std::process::{Command, Stdio, exit};
 
 use serde::Deserialize;
 
-use crate::config::{find_config, load_config};
-use crate::util::{die, git};
+use crate::{die, git};
+use crate::{find_config, load_config};
 
 #[derive(Debug, Clone, Copy, Deserialize)]
 #[serde(rename_all = "lowercase")]

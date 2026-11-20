@@ -6,7 +6,7 @@
 
 use std::path::Path;
 
-use crate::util::die;
+use crate::die;
 
 #[derive(Debug, PartialEq)]
 pub enum Action {

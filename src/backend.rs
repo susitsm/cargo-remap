@@ -7,9 +7,9 @@ use std::os::unix::fs::MetadataExt;
 use std::path::{Path, PathBuf};
 use std::process::{Command, Stdio};
 
-use crate::config::Config;
+use crate::Config;
 use crate::diagnose;
-use crate::util::{die, expand_tilde, git, main_worktree};
+use crate::{die, expand_tilde, git, main_worktree};
 
 // Inner script, run in a fresh user + mount namespace where our real uid/gid are
 // mapped to themselves (so ownership looks the same as on the host). --keep-caps
@@ -60,8 +60,7 @@ impl Mapping {
     /// commands such as `cargo new` then simply run unmapped.
     pub fn detect_opt(cfg: &Config, cwd: &Path) -> Option<Mapping> {
         if cfg.path.is_none()
-            && (!crate::util::in_path("git")
-                || git(cwd, &["rev-parse", "--show-toplevel"]).is_none())
+            && (!crate::in_path("git") || git(cwd, &["rev-parse", "--show-toplevel"]).is_none())
         {
             return None;
         }
@@ -233,7 +232,7 @@ fn git_overlay(m: &Mapping, dst: &Path) -> Option<(PathBuf, PathBuf, PathBuf)> {
         return None;
     }
     let abs = |arg: &str| {
-        let p = PathBuf::from(crate::util::git(&m.src, &["rev-parse", arg])?);
+        let p = PathBuf::from(crate::git(&m.src, &["rev-parse", arg])?);
         Some(if p.is_absolute() { p } else { m.src.join(p) })
     };
     let common = fs::canonicalize(abs("--git-common-dir")?).ok()?;

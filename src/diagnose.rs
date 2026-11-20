@@ -7,7 +7,7 @@
 use std::fs;
 use std::path::Path;
 
-use crate::util::{die, in_path};
+use crate::{die, in_path};
 
 /// Which package provides a program, per distro family (we do not try to detect the
 /// distro, so every family gets its own line).
