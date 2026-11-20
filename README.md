@@ -20,6 +20,7 @@ local private mount namespace active. `cargo remap agents` can install a skill e
 correct usage by agents.
 
 ## Quick start
+**`cargo-remap` only works on Linux**
 
 ### Install
 
