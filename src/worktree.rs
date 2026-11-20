@@ -238,11 +238,7 @@ fn copy_entry(src_root: &Path, dst_root: &Path, rel: &Path, reflink: Reflink) {
         },
     ) {
         Ok(()) => {
-            let how = if never {
-                "full copy"
-            } else {
-                "copy on write: instant, no extra disk space until files change"
-            };
+            let how = if never { "full copy" } else { "copy on write" };
             eprintln!("cargo-remap: copied {name} ({how})");
             return;
         }
